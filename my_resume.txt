@@ -1,0 +1,50 @@
+Rohit Karthick
+Chennai, Tamil Nadu, India
+ +91-9566887888 •  rkbeo5@gmail.com
+ • LinkedIn: https://www.linkedin.com/in/rohit-karthick/
+ • Github: https://github.com/7rohxt
+
+Technical Skills
+Languages: Python, SQL
+ML/DL: TensorFlow, Keras, Scikit-learn, OpenCV, Transformers
+Web/API: FastAPI, Flask, Streamlit
+DevOps: Docker, AWS EC2, Firebase, Git
+LLM Tools: LangChain, LoRA fine-tuning
+
+Professional Experience
+NeubAItics Pvt. Tech. Ltd., Chennai, India
+Machine Learning Intern – Jan 2025 to Jun 2025
+Assisted in building a real-time person tracking system using DeepSORT and InsightFace across zones and multiple CCTV cameras.
+Built and dockerized a real-time face attendance system with spoof detection using OpenCV and FastAPI; integrated Firebase for secure image storage and timestamped logs.
+Improved the Naibu mobile app’s tooth shade detection model by 10% through fine-tuning and data preprocessing.
+Machine Learning Engineer – Jul 2025 – Present
+Developing an LLM-based system for summarizing NGO reports, including charts and tables, based on TNEB reports.
+
+Portfolio Projects
+LoRA Fine-Tuning Project: Built and deployed a LoRA fine-tuned LLM for domain-specific text understanding.
+n8n Automation: Automated workflows connecting emails to Google Calendar events.
+Text-to-SQL Agent: Converts natural language queries into SQL to interact with databases.
+Cold Email Generator: End-to-end system using LLMs to generate automated job outreach emails.
+IPL Insights Bot: Built an interactive bot using LangChain, Streamlit, and LLaMA-based models to answer user queries from article URLs. Processed articles with UnstructuredURLLoader, created embeddings with sentence-transformers, and used FAISS for efficient retrieval.
+Fake Reviews Classifier: Flask-based web app for fake review detection using CountVectorizer + TF-IDF + classifier. Deployed on AWS EC2 with Gunicorn and Nginx.
+Transformers vs NLTK Sentiment Analysis: Comparative study of sentiment classification performance using traditional NLP pipelines and transformer-based models.
+
+Academic Research
+Heart Sound Anomaly Detection using Conv1D and LSTM – SN Computer Science Journal, under review (Jan 2025)
+Developed a hybrid CNN-LSTM model using TensorFlow and Keras to classify heart sounds into five categories with 95.7% accuracy.
+Used Librosa for MFCC feature extraction to capture temporal and spectral sound patterns.
+
+Certifications
+2025: Machine Learning Specialization – Deeplearning.ai & Stanford
+2025: IBM Data Science Professional Certificate
+2023: Oracle – Database Foundations
+
+Education
+SRM Institute of Science and Technology, Kattankulathur, India
+B.Tech, Computer Science Engineering, 2020–2024
+GPA: 8.21 / 10
+Relevant Coursework: DBMS, DSA, Data Analytics, AI, Cloud Computing, OS
+
+Standardized Tests
+GRE: 314 / 340 (Q: 162, V: 152)
+IELTS: 7.5 / 9
