@@ -1,4 +1,6 @@
 import streamlit as st
+import PyPDF2
+
 from langchain_helper import (
     extract_job_description,
     resume_to_json,
@@ -18,11 +20,10 @@ st.write("From job post + resume → to a smart, personalized email.")
 
 # ------------------------------------------------------------------------------------
 
-# Job description and Resume Side by Side
+# Step 1 & Step 2 Side by Side
 with st.container():
     col1, col2 = st.columns([1, 1], gap="large")
 
-    # Extract Job Decsription
     with col1:
         st.markdown("### Step 1: Job Posting URL")
         job_url = st.text_input("Paste the job posting URL here:")
@@ -33,12 +34,10 @@ with st.container():
         if st.button("Extract Job Description", use_container_width=True) and job_url:
             with st.spinner("Extracting job description..."):
                 st.session_state.job_description = extract_job_description(job_url)
-                st.success("✅ Job description extracted!")
 
-    # Extract Resume
     with col2:
         st.markdown("### Step 2: Upload Resume")
-        uploaded_resume = st.file_uploader("Upload your resume (.txt)", type=["txt"])
+        uploaded_resume = st.file_uploader("Upload your resume (.txt or .pdf)", type=["txt", "pdf"])
 
         if "resume" not in st.session_state:
             st.session_state.resume = None
@@ -48,10 +47,23 @@ with st.container():
         if uploaded_resume is not None:
             if uploaded_resume.name != st.session_state.resume_file:
                 with st.spinner("Parsing resume..."):
-                    resume_text = uploaded_resume.read().decode("utf-8")
+                    resume_text = ""
+
+                    # Handle TXT
+                    if uploaded_resume.type == "text/plain":
+                        resume_text = uploaded_resume.read().decode("utf-8")
+
+                    # Handle PDF
+                    elif uploaded_resume.type == "application/pdf":
+                        pdf_reader = PyPDF2.PdfReader(uploaded_resume)
+                        for page in pdf_reader.pages:
+                            text = page.extract_text()
+                            if text:
+                                resume_text += text + "\n"
+
+                    # Convert text to JSON
                     st.session_state.resume = resume_to_json(resume_text)
                     st.session_state.resume_file = uploaded_resume.name
-                    st.success("✅ Resume parsed!")
 
 # ------------------------------------------------------------------------------------
 
@@ -60,12 +72,15 @@ with st.container():
     col1, col2 = st.columns([1, 1], gap="large")
 
     with col1:
-        with st.expander("👀 View Parsed Job Description", expanded=False):
-            st.json(st.session_state.job_description)
+        if st.session_state.get("job_description"):   # only show if extracted
+            with st.expander("👀 View Parsed Job Description", expanded=False):
+                st.json(st.session_state.job_description)
 
     with col2:
-        with st.expander("👀 View Parsed Resume", expanded=False):
-            st.json(st.session_state.resume)
+        if st.session_state.get("resume"):   # only show if parsed
+            with st.expander("👀 View Parsed Resume", expanded=False):
+                st.json(st.session_state.resume)
+
 # ------------------------------------------------------------------------------------
 
 # Generate Few-Shot Email 
