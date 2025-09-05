@@ -16,7 +16,7 @@ from few_shots import few_shots
 st.set_page_config(page_title="Smart Cold Email Generator", layout="wide")
 
 st.title("📧 SmartApply - Cold Email Generator")
-st.write("From job post + resume → to a smart, personalized email.")
+st.write("From job post url + resume → to a smart, personalized email.")
 
 # ------------------------------------------------------------------------------------
 
@@ -84,24 +84,33 @@ with st.container():
 # ------------------------------------------------------------------------------------
 
 # Generate Few-Shot Email 
+if st.session_state.get("job_description") and st.session_state.get("resume"):
+
+    if "email_few_shot" not in st.session_state:
+        st.session_state.email_few_shot = None
+
+    if st.button("Generate Cold Email") and st.session_state.job_description and st.session_state.resume:
+        with st.spinner("Generating personalized email..."):
+            # Setup & retrieve example for Few-Shot
+            setup_vector_db(few_shots)
+            retrieved_example = retrieve_example("AI/ML Engineer with AWS and Python")
+            st.session_state.email_few_shot = generate_few_shot_email(
+                st.session_state.job_description, 
+                st.session_state.resume, 
+                retrieved_example
+            )
+
+# Display Few-Shot Email if generated            
 if "email_few_shot" not in st.session_state:
     st.session_state.email_few_shot = None
 
-if st.button("Generate Cold Email") and st.session_state.job_description and st.session_state.resume:
-    with st.spinner("Generating personalized email..."):
-        # Setup & retrieve example for Few-Shot
-        setup_vector_db(few_shots)
-        retrieved_example = retrieve_example("AI/ML Engineer with AWS and Python")
-        st.session_state.email_few_shot = generate_few_shot_email(
-            st.session_state.job_description, 
-            st.session_state.resume, 
-            retrieved_example
-        )
-
-# Display Few-Shot Email if generated
 if st.session_state.email_few_shot:
     st.subheader("Personalized Few-Shot Email")
-    st.text_area("Generated Email", st.session_state.email_few_shot, height=500)
+    
+    # Show preview and expandable full content
+    with st.expander("Generated Email", expanded=True):
+        st.text(st.session_state.email_few_shot)
+    
     st.download_button(
         "📥 Download Email",
         st.session_state.email_few_shot,
