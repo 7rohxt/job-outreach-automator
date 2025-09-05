@@ -197,7 +197,8 @@ Candidate Resume:
 - If required years of experience are missing, highlight equivalent projects and achievements instead.
 - Keep the email concise, persuasive, and tailored to this job (avoid generic phrasing).
 - Limit the email to **around 200 words**.
-- End with candidate contact details (email, phone, LinkedIn, GitHub if available).
+- End with candidate contact details: email, phone, LinkedIn, GitHub if available - one in each line.
+- Finally regards.
 """
     )
 
